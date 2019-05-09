@@ -10,15 +10,15 @@ Também explique o funcionamento e o que é necessário para que seja possível 
 
 ################################
 
-Programa em Python para implementar bate-papo cliente-servidor usando multithreading com GUI.
+### Programa em Python para implementar bate-papo cliente-servidor usando multithreading com GUI.
 
-Instruções:
-Faça o Donwload do arquivo no github
+## Instruções:
+### Faça o Donwload do arquivo no github
 
 
-Rode com os comandos:
-  python server.py - para rodar o servidor
-  python client.py - para rodar o cliente
+## Rode com os comandos:
+  ### python server.py - para rodar o servidor
+  ### python client.py - para rodar o cliente
   
 
-Para entender o código terá de ver os comentários no código.
+## Para entender o código terá de ver os comentários no código.
