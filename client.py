@@ -1,32 +1,33 @@
 import socket
+import sys
 
-def chat_client():
+def main():
+    # Cria socket
+    soc = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    host = "localhost"
+    port = 5000
 
-    # Criar o socket
-    client_sock = socket.socket()
+    try:
+        # Tenta conectar com ip e porta
+        soc.connect((host, port))
+    except:
+        # Erro de conexão
+        print("Connection error")
+        sys.exit()
 
-    # Conectar ao servidor com ip e porta
-    client_sock.connect(('localhost', 9000))
-
+    print("Enter 'quit' to exit")
     message = input(" -> ")
 
-    # Envia e recebe mensagem enquanto a mensagem for diferente de see ya 
-    while message.lower().strip() != 'see ya':
+    # envia a mensagem enquanto nao for a mensagem quit
+    while message != 'quit':
+        soc.sendall(message.encode("utf8"))
+        if soc.recv(5120).decode("utf8") == "-":
+            pass
 
-        # Envia a mensagem ao servidor
-        client_sock.send(message.encode())
-
-        # Recebe mensagem do servidor e nao aceita dados maior que 1024 bytes
-        data = client_sock.recv(1024).decode()
-
-        # Imprime mensagem do Servidor
-        print('Mensagem do Servidor: '+data)
-
-        # Prepara para enviar nova mensagem
         message = input(" -> ")
+        
+    # se for quit envia a mensagem quit para o servidor fechar a conexão
+    soc.send(b'--quit--')
 
-    # Fecha conexao
-    client_sock.close()
-
-if __name__ == '__main__':
-    chat_client()
+if __name__ == "__main__":
+  main()
